@@ -1,0 +1,113 @@
+<html>
+<head>
+    <title>Giftastic</title>
+</head>
+<body>
+    
+
+    </div>
+
+<div id = "button-display"></div>
+
+</br></br>
+
+    <form id="musician-form">
+            <label>Search for a singer</label>
+            <input type="text" id="musician-input">
+            <input class="find-musician" type="submit" value="Search"><br>
+    
+            </form>
+
+            <div id ="musician-display"></div>
+    
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script type="text/javascript">
+
+            $(".find-musician").on("click", function(event) {
+
+                event.preventDefault();
+
+                var musician = $("#musician-input").val();
+
+                var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + musician + "&api_key=GrxCNbNCFGk5V4R6BusrZigwULfJChIP&limit=10";
+
+          $.ajax({
+          url: queryURL,
+          method: "GET"
+           }).then(function(response) {
+
+            console.log (response);
+               for (var i = 0; i < response.data.length; i++) {
+                
+                var MusicianDiv = $("<div>")
+                
+                var ratingDisplay = $("<p>").text(response.data[i].rating);
+                
+                var gifDisplay = $("<img>").attr("src", response.data[i].images.fixed_height.url);
+
+              
+                
+                
+                MusicianDiv.append(ratingDisplay);
+
+                MusicianDiv.append(gifDisplay);
+
+               $("#musician-display").prepend(MusicianDiv);
+
+               
+             
+
+                }});
+                var search = $("#musician-input").val();
+
+                var button = $("<button>").text(search);
+                
+                var ButtonDisplay = $("<div>");
+
+                 ButtonDisplay.append(button);
+
+               $("#button-display").prepend(ButtonDisplay);
+
+        
+
+            });
+
+           
+
+               
+               
+
+    
+
+            //var topics = ["Beyonce", "Michael Jackson", "Spice Girls"];
+
+             //for (i = 0; i < topics.length; i++) { 
+               
+              // var button = $("<button>");
+
+
+               // button.text(topics[i]);
+                // $("#button-display").append(button);
+             //}   
+
+            
+            // $("#button-display").on("click", function(){
+
+
+            
+                
+                
+                
+
+
+             
+        
+
+            </script>
+        
+      
+      
+</body>
+
+</html>
